@@ -4,10 +4,11 @@ const helpDialog=document.getElementById('help-dialog'), helpSearch=document.get
 helpBody.innerHTML=helpChapters.map((c,i)=>`<section id="help-ch-${i}" class="help-chapter"><h2>${c.title}</h2>${c.html}</section>`).join('');
 helpNav.innerHTML=helpChapters.map((c,i)=>`<button type="button" data-chapter="${i}">${i===0?'開始使用':c.title}</button>`).join('');
 const normalizeHelp=t=>t.toLocaleLowerCase().replace(/\s+/g,'');
-function filterHelp(){const words=helpSearch.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);let count=0;helpBody.querySelectorAll('.help-chapter').forEach((section,i)=>{const found=words.every(w=>normalizeHelp(section.textContent).includes(normalizeHelp(w)));section.hidden=!found;helpNav.children[i].hidden=!found;if(found)count++;});document.getElementById('help-count').textContent=words.length?`找到 ${count} 個章節`:'共 9 個章節 · 支援欄位名稱查詢';document.getElementById('help-empty').hidden=count>0;helpBody.scrollTop=0;}
+function filterHelp(){const words=helpSearch.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);let count=0;helpBody.querySelectorAll('.help-chapter').forEach((section,i)=>{const found=words.every(w=>normalizeHelp(section.textContent).includes(normalizeHelp(w)));section.hidden=!found;helpNav.children[i].hidden=!found;if(found)count++;});document.getElementById('help-count').textContent=words.length?`找到 ${count} 個章節`:`共 ${helpChapters.length} 個章節 · 支援欄位名稱查詢`;document.getElementById('help-empty').hidden=count>0;helpBody.scrollTop=0;}
 helpSearch.addEventListener('input',filterHelp);
 document.getElementById('help-clear').onclick=()=>{helpSearch.value='';filterHelp();helpSearch.focus();};
 document.getElementById('help-open').onclick=()=>{helpDialog.showModal();helpSearch.focus();};
 document.getElementById('help-close').onclick=()=>helpDialog.close();
 helpNav.addEventListener('click',e=>{const b=e.target.closest('button[data-chapter]');if(b)document.getElementById('help-ch-'+b.dataset.chapter).scrollIntoView({block:'start'});});
 filterHelp();
+
