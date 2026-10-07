@@ -12,3 +12,4 @@ document.getElementById('help-close').onclick=()=>helpDialog.close();
 helpNav.addEventListener('click',e=>{const b=e.target.closest('button[data-chapter]');if(b)document.getElementById('help-ch-'+b.dataset.chapter).scrollIntoView({block:'start'});});
 filterHelp();
 
+

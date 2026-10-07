@@ -2,8 +2,8 @@
 (function(root){
 const names={plate:'樓板模板',beam:'梁模板',column:'柱模板',wall:'牆模板'};
 const num=(x,p=5)=>Number.isFinite(x)?Number(x.toPrecision(10)).toLocaleString('en-US',{maximumFractionDigits:p}):'—';
-function blocks(d,F,stamp=new Date().toLocaleString('zh-TW')){
- const r=F.calculate(d);if(r.errors.length)throw new Error(r.errors.join('；'));
+function blocks(d,F,stamp=new Date().toLocaleString('zh-TW'),snapshotResult){
+ const r=snapshotResult||F.calculate(d);if(r.errors.length)throw new Error(r.errors.join('；'));
  if(!Number.isFinite(r.max)||r.rows.some(x=>![x.w,x.M,x.V,x.delta,x.A,x.I,x.Z].every(Number.isFinite)))throw new Error('輸入數值過大，請修正後匯出。');
  const b=[],p=t=>b.push({type:'p',text:t}),h=(t,page=false)=>b.push({type:'h',text:t,page}),table=(headers,rows,widths)=>b.push({type:'table',headers,rows,widths}),N=num;
  b.push({type:'title',text:names[d.mode]+'支撐詳細計算書'});
@@ -86,7 +86,7 @@ function blocks(d,F,stamp=new Date().toLocaleString('zh-TW')){
  p('本計算書重現附件算法，未另作現行規範符合性校訂。連續梁採原固定係數，非任意跨數、跨比及載重配置的通用解；各斷面剪應力均採 fv = 1.5V/A。');
  p('模板計算條帶寬：樓板 100 cm，梁底及各側模板 1 cm。原計算不另加模板、角材及貫材自重；樓板 WD 由使用者指定。尚未包含支架整體穩定、斜撐、接頭、偏心、基礎與地基承壓檢核。');
  p('原程式的梁板材料初值不一定合格，本版如實列出結果。計算採雙精度，顯示值四捨五入；公式中的 π 採完整精度。');
- return b;
+ h("六 同一次引擎的完整計算紀錄");for(const s of r.trace||[]){h(s.title);p(s.formula);p("數值代入：\n"+s.substitution);p("結果："+s.result+" "+s.unit);if(s.condition)p("条件與判定："+s.condition);if(s.source)p("來源："+s.source);if(s.table)table(s.table.headers,s.table.rows,s.table.headers.map(()=>7900/s.table.headers.length));}return b;
 }
 function documentFromBlocks(blocks,D){
  const {Document,Paragraph,TextRun,Table,TableRow,TableCell,WidthType,HeadingLevel,BorderStyle,AlignmentType}=D;
@@ -96,10 +96,11 @@ function documentFromBlocks(blocks,D){
  const children=blocks.flatMap(b=>{
   if(b.type==='title')return [new Paragraph({text:b.text,style:'Title'})];
   if(b.type==='h')return [new Paragraph({text:b.text,heading:HeadingLevel.HEADING_1,pageBreakBefore:b.page,keepNext:true})];
-  if(b.type==='p')return [para(b.text)];
+  if(b.type==='p')return [para(b.text)];if(b.type==='image')return [new Paragraph({children:[new D.ImageRun({type:'png',data:b.data,transformation:{width:560,height:b.height||300}})]}),para(b.caption||'本次輸入荷載與跨距示意，非施工詳圖。')];
   const widths=b.widths;return [new Table({width:{size:9360,type:WidthType.DXA},columnWidths:widths.map(w=>Math.round(w/7900*9360)),borders:{top:border,bottom:border,left:border,right:border,insideHorizontal:border,insideVertical:border},rows:[b.headers,...b.rows].map((row,i)=>new TableRow({tableHeader:i===0,cantSplit:true,children:row.map((v,j)=>new TableCell({width:{size:Math.round(widths[j]/7900*9360),type:WidthType.DXA},shading:{fill:i===0?'DCE6EE':'FFFFFF'},verticalAlign:'center',margins:{top:60,bottom:60,left:110,right:110},children:[new Paragraph({children:[run(v,i===0)],alignment:j===0?AlignmentType.LEFT:AlignmentType.CENTER,spacing:{after:0,line:270,lineRule:'exact'}})]}))}))}),para('',{spacing:{after:30,line:80,lineRule:'exact'}})];
  });
  return new Document({creator:'模板支撐分析',title:blocks[0].text,description:'設計參數與詳細計算過程',styles:{default:{document:{run:{font:{ascii:'Noto Sans CJK TC',hAnsi:'Noto Sans CJK TC',eastAsia:'Noto Sans CJK TC'},size:20,color:'000000'},paragraph:{spacing:{after:65,line:270,lineRule:'exact'}}}},paragraphStyles:[{id:'Title',name:'Title',basedOn:'Normal',next:'Normal',run:{font:{ascii:'Noto Sans CJK TC',hAnsi:'Noto Sans CJK TC',eastAsia:'Noto Sans CJK TC'},size:34,bold:true,color:'000000'},paragraph:{spacing:{before:0,after:240}}},{id:'Heading1',name:'Heading 1',basedOn:'Normal',next:'Normal',run:{font:{ascii:'Noto Sans CJK TC',hAnsi:'Noto Sans CJK TC',eastAsia:'Noto Sans CJK TC'},size:26,bold:true,color:'000000'},paragraph:{keepNext:true,spacing:{before:200,after:130}}}]},sections:[{properties:{page:{size:{width:12240,height:15840},margin:{top:900,bottom:900,left:1440,right:1440}}},children}]});
 }
 const api={blocks,documentFromBlocks};root.FormworkWord=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
+

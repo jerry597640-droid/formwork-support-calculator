@@ -36,3 +36,4 @@ helpBody.addEventListener('click',e=>{const b=e.target.closest('[data-example]')
 undo.onclick=()=>{if(!previous)return;states[previous.type]=previous.data;document.querySelector('#modes [data-mode="'+previous.type+'"]').click();previous=null;undo.hidden=true;};
 filterHelp();
 })(typeof window!=='undefined'?window:globalThis);
+

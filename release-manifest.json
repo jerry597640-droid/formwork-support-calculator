@@ -1,0 +1,23 @@
+{
+  "repository": "jerry597640-droid/formwork-support-calculator",
+  "baseSHA": "856dc1cf9588f6b7da780cf741d02c312e9035b5",
+  "published": false,
+  "noHubDependencies": true,
+  "files": {
+    "engine.js": "33720dbab91a55fc181687709eb2a771f639fba7f3b2deb16e10f4654cdaa8ff",
+    "app.js": "f98601d24d455b768d35fb2b8d1a5e086233e647b64550167dbfb0d5ee14d73d",
+    "word-report.js": "d63f6dec5750c135e3b486a2c58084441f57fc73a672d7d0b46b4b412a283870",
+    "style.css": "2233de408edbc23d9eb37ef61802b31640e5a2119588423fd1e173f75b4851a3",
+    "workbench.js": "872403154858a88ed754d22d3caa05e7f0f03458e451d35cc62ee2419317354a",
+    "template.html": "24e6c7506391ccc95508b8fa54a90901968c276b084823f4b549c70904fdd9a2",
+    "index.html": "d5bd50c99e6fdabdea4493cf32c9968162dc8ed10aa8d94aff4d0bcb887748f5",
+    "build.cjs": "94a2f3f3fa5c573bd1148831c04de28917cf81e1d2b3887fefff6e54cb9aa5c0",
+    "build-offline.cjs": "b85abe0358eb6dbdd0c504a0898c295e0a353fe59bda9c5f861b5ddaf3e53a0b",
+    "offline-kit-v1.1.zip": "15051b933aca0584a7f9fc02ee7170f1ca6292008ad4dcd6057200d475159005",
+    "vendor/docx.js": "ecef72931c98461fc327aa6e95867820aced5db4c3d971ac5ad38ccda21dd360",
+    "vendor/docx-LICENSE.txt": "b5b2364c0c95a26b2a2399d7e706a61acac680be1d5b180b00592ee85830bffb",
+    "vendor/README.md": "03126b7193de9ec3f205be35db64aba2aa38ed988400d1cd6b8be7949ba5ece0",
+    "README.md": "a54b87ff52257c194f5dd8b4d0d7562fa7ee9e5e0a105d37e9a5f1b057a5c1a6",
+    "FINAL-VALIDATION.md": "911db8eb35ed23b77cc68a12bc14fde7931a892e98dd217c6f3d03ff6823377a"
+  }
+}
