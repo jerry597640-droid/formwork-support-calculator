@@ -86,7 +86,7 @@ function blocks(d,F,stamp=new Date().toLocaleString('zh-TW'),snapshotResult){
  p('本計算書重現附件算法，未另作現行規範符合性校訂。連續梁採原固定係數，非任意跨數、跨比及載重配置的通用解；各斷面剪應力均採 fv = 1.5V/A。');
  p('模板計算條帶寬：樓板 100 cm，梁底及各側模板 1 cm。原計算不另加模板、角材及貫材自重；樓板 WD 由使用者指定。尚未包含支架整體穩定、斜撐、接頭、偏心、基礎與地基承壓檢核。');
  p('原程式的梁板材料初值不一定合格，本版如實列出結果。計算採雙精度，顯示值四捨五入；公式中的 π 採完整精度。');
- h("六 同一次引擎的完整計算紀錄");for(const s of r.trace||[]){h(s.title);p(s.formula);p("數值代入：\n"+s.substitution);p("結果："+s.result+" "+s.unit);if(s.condition)p("条件與判定："+s.condition);if(s.source)p("來源："+s.source);if(s.table)table(s.table.headers,s.table.rows,s.table.headers.map(()=>7900/s.table.headers.length));}return b;
+ h("六 同一次引擎的完整計算紀錄");for(const s of r.trace||[]){h(s.title);p(s.formula);p("數值代入：\n"+s.substitution);p("結果："+s.result+" "+s.unit);if(s.condition)p("条件與判定："+s.condition);if(s.source)p("來源："+s.source);if(s.table)table(s.table.headers,s.table.rows,s.table.headers.map(()=>7900/s.table.headers.length));}h('附錄 現行規範資訊與適用範圍');p('查核日期 2026-10-10。營造安全衛生設施標準於 2026-06-30 修正；第 11-2 條於 2027-07-01 施行。模板支撐設計及施工應核對第 130–136 條。此計算書只包含所列構件與單柱檢核，不證明整體支撐系統符合規範。');p('ACI 官方列示 PRC-347-14(21) 與 PRC-347.2-17(25)；本版僅提供版本與適用範圍對照，未完整實作其設計條文。');p('官方來源：https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=N0060014 ；https://www.concrete.org/topicsinconcrete/topicdetail.aspx?search=aci+347');return b;
 }
 function documentFromBlocks(blocks,D){
  const {Document,Paragraph,TextRun,Table,TableRow,TableCell,WidthType,HeadingLevel,BorderStyle,AlignmentType}=D;

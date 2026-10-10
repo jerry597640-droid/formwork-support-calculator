@@ -1,0 +1,4 @@
+const assert=require('node:assert/strict'),F=require('../engine.js'),old=require('./legacy-engine-baseline.cjs');let count=0;
+for(const mode of ['plate','beam','column','wall'])for(const pressure of ['normal','scc','hydro','manual']){let d=F.defaults(mode);d.pressure=pressure;for(const factor of [.5,1,2]){d.H=3*factor;d.R=factor;const r=F.calculate(d),o=old.calculate(d);assert.deepEqual(r,o);count++;}}
+for(const mode of ['plate','beam']){let d=F.defaults(mode),j=mode==='beam'?4:2;F.setInput(d,'m.'+j+'.L',.8);assert.equal(d.X,80);F.setInput(d,'Y',65);assert.equal(d.members[j-1].L,.65);count+=2;}
+let d=F.defaults('plate');d.members.pop();assert.ok(F.calculate(d).errors.length);d=F.defaults('plate');d.members[0].sim='bad';assert.ok(F.calculate(d).errors.length);d=F.defaults('plate');d.support='bad';assert.ok(F.calculate(d).errors.length);console.log(`${count+3} checks passed`);

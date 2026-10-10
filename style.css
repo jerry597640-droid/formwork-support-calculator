@@ -40,3 +40,5 @@ body[data-view=audit] #result,body[data-view=audit] .sensitivity,body[data-view=
 .actual-model svg text{fill:#102d44!important;font-size:22px}.actual-model svg{background:#fff}.trace-body .table-wrap{max-width:100%}
 
 @media print{#report .actual-model{display:block!important}#report .actual-model svg{width:100%;max-width:560px}}
+/* Keep the check view focused on demands and capacities. */
+body[data-view=checks] .actual-model{display:none}
