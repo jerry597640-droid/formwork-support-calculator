@@ -11,7 +11,8 @@ function blocks(d,F,stamp=new Date().toLocaleString('zh-TW'),snapshotResult){
  p('產生時間：'+stamp+'。本計算書採匯出當下的設計參數；跨距敏感度拉霸屬獨立比較，不納入設計結果。');
  p('計算依據：模板支撐計算(1).zip 內 FormMain.vb，_CALCULATE_ENGINE_GO 與 _DMIN。');
  h('一 設計條件與檢核摘要');
- p('單位：力 kgf；內力 kgf·cm；應力 kgf/cm²；計算跨距 cm。輸入跨距 m，計算時乘 100。面載重 tf/m²；混凝土單位重 kgf/m³。');
+ p('單位：力 kgf；內力 kgf·cm；應力 kgf/cm²；計算跨距 cm。輸入跨距 m，計算時乘 100。面載重 tf/m²；混凝土密度輸入 kg/m³，重力制單位重換算為 kgf/m³。');
+ if(d.mode!=='plate')p('混凝土密度 ρ = '+N(d.rho)+' kg/m³；標準重力換算 W0 = ρ × 9.80665 / 1000 = '+N(d.rho*9.80665/1000,7)+' kN/m³；以下重力制 γ = '+N(d.rho)+' kgf/m³。');
  table(['構件','跨距 m','彎曲比','剪力比','撓度比','判定'],r.rows.map(x=>[x.name,N(x.L),...x.ratios.map(v=>N(v,4)),x.ratio<1?'OK':'NG']),[1800,1000,1300,1300,1300,1200]);
  p('彎曲比 = fb/Fb；剪力比 = fv/Fv；撓度比 = δ/δa。判定採未四捨五入數值；一般項目須嚴格小於容許值，等於時為 NG。木柱沿用 P ≤ Pa。表內小數為顯示值。');
  if(r.s)p('支柱：P = '+N(r.s.P)+' kgf；Pa = '+N(r.s.capacity)+' kgf；需求／容許比 = '+N(r.s.ratio)+'；'+(r.s.pass?'OK':'NG')+'。');

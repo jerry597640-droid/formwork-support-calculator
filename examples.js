@@ -2,8 +2,8 @@
 function makeExample(type){
  const d=Formwork.defaults(type);d.members.forEach(m=>m.sim=1);d.def='both';
  if(type==='plate'){Object.assign(d,{wd:.84,wi:.2,wl:.2,support:'frame',capacity:2});Formwork.setInput(d,'X',100);Formwork.setInput(d,'Y',80);}
- if(type==='beam'){Object.assign(d,{H:.6,rho:2400,wi:.1,wl:.2,support:'frame',capacity:2,tieSp:.5,tieCapacity:1433});Formwork.setInput(d,'X',100);Formwork.setInput(d,'Y',50);}
- if(type==='column'||type==='wall'){Object.assign(d,{H:3,rho:2400,R:1,T:25,pressure:'hydro',tieSp:.5,tieCapacity:1433});d.members[0].L=.2;d.members[1].L=.4;d.members[2].L=.5;}
+ if(type==='beam'){Object.assign(d,{H:.6,rho:2350,wi:.1,wl:.2,support:'frame',capacity:2,tieSp:.5,tieCapacity:1433});Formwork.setInput(d,'X',100);Formwork.setInput(d,'Y',50);}
+ if(type==='column'||type==='wall'){Object.assign(d,{H:3,rho:2350,R:1,T:25,pressure:'hydro',tieSp:.5,tieCapacity:1433});d.members[0].L=.2;d.members[1].L=.4;d.members[2].L=.5;}
  return d;
 }
 root.FormworkExamples={makeExample};if(typeof module!=='undefined')module.exports=root.FormworkExamples;
@@ -14,7 +14,7 @@ const types=['plate','beam','column','wall'];
 let html='<p>以下是完整教學資料，不是工地核定配置。材料數值承接原程式示範值；2 tf 支架容量為教學假設，並非特定產品證明。範例刻意保留可能的 NG，方便練習判讀。實際使用須替換為本案資料。</p><p>手動操作：選模式 → 依下表填載重及每組構件 → 填支撐／緊結器 → 選容許撓度 → 核對結果。全部採「簡支」及「min(0.3 cm, L/240)」。也可按一鍵載入；會取代該模式現有輸入，可按頁首「復原載入前資料」撤銷最近一次載入。</p>';
 for(const type of types){const d=makeExample(type),r=Formwork.calculate(d),vertical=type==='plate'||type==='beam';
  html+='<h3>'+names[type]+'完整輸入範例</h3><button type="button" class="load-example" data-example="'+type+'">載入'+names[type]+'範例</button>';
- let rows=type==='plate'?[['靜載重 WD','0.84 tf/m²'],['衝擊 WI／施工活載 WL','0.20／0.20 tf/m²']]:type==='beam'?[['梁高 H／單位重 γ','0.60 m／2400 kgf/m³'],['衝擊 WI／施工活載 WL','0.10／0.20 tf/m²']]:[['側壓計算方式','靜水壓 γH（新增比較）'],['澆置高度 H／單位重 γ','3.00 m／2400 kgf/m³'],['澆置速度 R／混凝土溫度 T','1 m/hr／25°C（本靜水壓範例不參與計算）']];
+ let rows=type==='plate'?[['靜載重 WD','0.84 tf/m²'],['衝擊 WI／施工活載 WL','0.20／0.20 tf/m²']]:type==='beam'?[['梁高 H／密度 ρ','0.60 m／2350 kg/m³'],['衝擊 WI／施工活載 WL','0.10／0.20 tf/m²']]:[['側壓計算方式','靜水壓 γH（新增比較）'],['澆置高度 H／密度 ρ','3.00 m／2350 kg/m³'],['澆置速度 R／混凝土溫度 T','1 m/hr／25°C（本靜水壓範例不參與計算）']];
  if(vertical)rows.push(['支撐種類／容許承載力','重型鋼架／指定容量；2 tf（假設值）'],['支撐分攤寬 X／長 Y',d.X+'／'+d.Y+' cm（由 L3／L2 連動）']);
  if(type!=='plate')rows.push(['緊結器間距 S／每組容許拉力 Ta','0.50 m／1433 kgf（示範值）']);
  rows.push(['支承模型／容許撓度','所有構件簡支／min(0.3 cm, L/240)']);html+=tbl(['輸入欄位','照著填入'],rows);

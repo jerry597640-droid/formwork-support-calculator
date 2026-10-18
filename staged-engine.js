@@ -6,7 +6,7 @@ const JASS5=Object.freeze({id:'jass5-2022',title:'日本建築學會 JASS 5（20
 function rect(name,b,h,E=70000,Fb=140,Fv=12){return {name,shape:'rect',b,h,A:1,I:1,Z:1,E,Fb,Fv};}
 function defaults(mode='wall'){
  const total=mode==='beam'?150:300,slab=mode==='beam'?20:0,top=total-slab;
- return {version:2,mode,project:'',location:'',total,slab,rho:2300,k:1,pressure:JASS5.id,cap:.414,manual:.414,pressureSource:'',layers:mode==='beam'?'two':'one',deflection:240,absolute:.3,
+ return {version:2,mode,project:'',location:'',total,slab,rho:2350,k:1,pressure:JASS5.id,cap:.414,manual:.414,pressureSource:'',layers:mode==='beam'?'two':'one',deflection:240,absolute:.3,
   members:{panel:rect('襯板',1,1.5,70000,150,10),small:rect('小格柵',3.6,4.5),primary:rect('第一層大格柵',9,4.5),secondary:rect('第二層大格柵',9,4.5)},
   tie:{area:.316,Ft:1400,capacity:548,basis:'capacity'},stages:[{top:top/3,H1:15,B2:30,H3:40,H4:40,B4:30},{top:top*2/3,H1:30,B2:30,H3:50,H4:50,B4:30},{top,H1:30,B2:30,H3:60,H4:60,B4:30}]};
 }

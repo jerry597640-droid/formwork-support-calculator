@@ -2,7 +2,7 @@
 (function(root){
 const member=(name,b,h,L,E,Fb,Fv,sim=1,shape='rect',A=1,I=1,Z=1)=>({name,b,h,L,E,Fb,Fv,sim,shape,A,I,Z});
 function defaults(mode='plate'){
- const d={mode,wd:.84,wi:.2,wl:.2,rho:2400,H:6.1,R:2.1,T:23,pressure:'normal',manualP:5000,def:'both',X:90,Y:90,Lb:100,support:'tube',D:4.85,t:.25,sw:6,sh:6,Fc:28,capacity:32,tieSp:1.25,tieCapacity:1433,confirmed:false,members:[]};
+ const d={mode,wd:.84,wi:.2,wl:.2,rho:2350,H:6.1,R:2.1,T:23,pressure:'normal',manualP:5000,def:'both',X:90,Y:90,Lb:100,support:'tube',D:4.85,t:.25,sw:6,sh:6,Fc:28,capacity:32,tieSp:1.25,tieCapacity:1433,confirmed:false,members:[]};
  if(mode==='plate')d.members=[member('模板',100,1.5,.35,70000,140,10),member('角材',4.5,10.5,.9,70000,160,14),member('貫材',4.5,10.5,.9,70000,160,14)];
  else if(mode==='beam'){Object.assign(d,{H:.9,wi:0,wl:.35,X:120,Y:70,Lb:350,tieSp:.7});d.members=[member('側模板',1,1.5,.26,70000,110,10),member('側直材',6,6,.7,70000,110,10),member('底模板',1,1.5,.21,70000,110,10),member('底角材',6,6,.7,70000,110,10),member('底貫材',10,10,1.2,2100000,1500,1000)];}
  else d.members=[member('側模板',1,1.5,.2,50000,110,10),member('直材',6,6,.5,70000,120,14,0),member('橫材',6,6,1.25,2100000,1500,1000,1,'custom',8.64,189,37.8)];
