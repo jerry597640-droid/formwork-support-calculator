@@ -1,13 +1,13 @@
 {
   "repository": "jerry597640-droid/formwork-support-calculator",
-  "baseSHA": "1efd838a774c8f614c7e6a8c81d2da9ed9c564fd",
+  "baseSHA": "3ae6a3bd882f7f3119d5fe99968aa07da943d18a",
   "noHubDependencies": true,
   "files": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "README.md": "5c6bf6daacebfcc88bb22a0926d06508ecedfb119343c28593d5ab35268fbc67",
+    "README.md": "5aab0cec6c6cd88d0a302c802b51a63ab38fafa909021e0a1326c1817bc6e78c",
     "VALIDATION-20261010.md": "312c1b493461418a00089fe0559b29f512d9f18c9fcc80ab9504a135d2dd2ed8",
     "VALIDATION-20261018.md": "77e3af260e4042dd14a57858f5999a6dc65a6b34cf0369374cd5c461b4940cf3",
-    "VALIDATION-20261021.md": "086b6bdc6e5a4030cc0b52d2eecef1780c4de126b4bbef0bd5bc0d5bda8131cb",
+    "VALIDATION-20261021.md": "36c0cd7cd890e1aeff78783a30b889461ef3f9ff293e4db464ce775d7c3f9999",
     "app.js": "c008fa4cc4df420a34c5cdb9a0fd9c62c3ec3b96e3824c8bc173d8b1ebe9e711",
     "build-offline.cjs": "885ab2e70f2eda5c5be5af1179315abd4bbb3838e9226b8298c54661c8a2616b",
     "build.cjs": "6915faf754b7332019e9ac6bcad861f4c2a86e215faf36de420c1c3f3e3f8171",
@@ -22,15 +22,15 @@
     "images/reference/operation-guide.jpg": "4c6fa2b7721b68cd26ed61077fa8d2812136c54e76fb68719b356faea0921b99",
     "images/reference/wall-tier.jpeg": "ac63f59004d4dfaeadc5d054932f97ed25eb20dbac0318419837a021be266684",
     "images/wall.png": "f03c7df199fbe3f1168957f033c4144f1461c0902546a5634df19dde301757e4",
-    "index.html": "70bb6724df5bf4eb17a5ee9042087dcc31fa89d09c6f987476caa78056dd5770",
+    "index.html": "f9ca3aa502218d22101e63b00fc333fcbd9cae37c8e3fde5cd9dc3c67258c862",
     "media/tutorial-poster.jpg": "54e43c313ed21e16c904a2c3b9f5e412696934070af41c15270a8d986e7d70f8",
     "media/tutorial.mp4": "f6d657d70edbcaf643b966f77b5d47778962bb880aa162a75d394862faedc738",
     "parameter-definitions.js": "80f7b468db837bd543517199008535b140997a5a0e07d1ea3f6ffd5d0f8d45be",
     "staged-engine.js": "9c3e52056ede1bb06ea908c4eb48a9d8cfcc4e84b0fb1e648ecaeb92436c2b7d",
     "staged-ui.js": "9863e914fc55e3a86c2ea2703ca7da63204d9d0a30264607bbc139b9e255a2ed",
-    "staged.css": "5d9defe9270b2b345f3e4425fb5db12c250b874bbf8558423f948f70c9c32755",
+    "staged.css": "59d6f9cd58d6ce8ca418fc2e9613a711072670b28588d069b2264e5053cb7f01",
     "style.css": "92f9678de4addb7557a59fd9b6fc21950d25d8054b06ac2722738dccef5f310e",
-    "template.html": "f23c8ac27c96e383bb7f4438a02862c8f67149701477b457c40b265bc3516d11",
+    "template.html": "0d1427674efd0222773b8439a044efb21757bdd59426ecaf3dee8d0decb198b2",
     "tests/historical-pressure.cjs": "b94916a9088e34e03cbda95efec238470af583978800f887719950ada227e2ff",
     "tests/legacy-engine-baseline.cjs": "33720dbab91a55fc181687709eb2a771f639fba7f3b2deb16e10f4654cdaa8ff",
     "tests/regression.cjs": "a8fb6bc69a8ae848efae8397fd7ef71798d112f9191820bb82afe0ad795aa2b1",
@@ -78,7 +78,8 @@
       "reference-image-workflow",
       "geometry-only-reference-preset",
       "per-stage-panel-summary",
-      "synchronized-stage-detail"
+      "synchronized-stage-detail",
+      "staged-document-scroll-fix"
     ],
     "engineeringChecks": 182,
     "concreteDensityKgM3": 2350,
@@ -86,7 +87,14 @@
       1440,
       390
     ],
-    "wordTextRenderPages": 6
+    "wordTextRenderPages": 6,
+    "scrollRegression": {
+      "desktopWidthPx": 1280,
+      "phoneWidthPx": 390,
+      "pageEndVerified": true,
+      "detailScrollChaining": true,
+      "legacyPanelScrolling": true
+    }
   },
   "status": "validated build"
 }
